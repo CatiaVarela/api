@@ -72,15 +72,14 @@ function updateAssignment(req, res) {
 
 // suppression d'un assignment (DELETE)
 function deleteAssignment(req, res) {
-
-    Assignment.findByIdAndRemove(req.params.id, (err, assignment) => {
+const assignmentId = req.params.id;
+    Assignment.findOneAndRemove({ id: assignmentId }, (err, assignment) => {
         if (err) {
             res.send(err);
         }
         res.json({message: `${assignment.nom} deleted`});
     })
-}
-
+ }
 
 
 module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };
